@@ -18,4 +18,9 @@ Vue.createApp({
       ],
     }
   },
+  methods: {
+    openModal(thumb) {
+      console.log(thumb)
+    },
+  },
 }).mount('#app')
