@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link href="./carousel.css" rel="stylesheet">
+  <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+  <title>Carousel</title>
+</head>
+
+<body>
+  <div id="app" class="container">
+    <h1>carousel sample</h1>
+    <!-- カルーセルテンプレート-->
+    <div class="carousel-wrapper">
+      <transition tag="div" :name="imageTransitionName">
+        <div class="caroutsel-item" :key="target.id" :style="{height: currentHeight + 'px' }">
+          <img :src="target.src" />
+        </div>
+      </transition>
+
+      <!-- ページャテンプレート-->
+      <ol class="carousel-pager">
+        <li v-for="(item, index) in items" :key="item.id">
+          <button
+            tabindex="0"
+            :class="{ 'isCurrent': index === selectedIndex }"
+            @click="onClickPager(index)"
+            ></button>
+        </li>
+      </ol>
+      <!-- ページャテンプレート ここまで-->
+      <ul class="carousel-navigation">
+        <li>
+          <button class="button carouselButton carouselButton-prev" @click="onClickPrev">
+            PREV
+          </button>
+        </li>
+        <li>
+          <button class="button carouselButton carouselButton-next" @click="onClickNext">
+            NEXT
+          </button>
+        </li>
+      </ul>
+
+      <!-- カルーセルテンプレート ここまで -->
+    </div>
+  </div>
+  <script src="https://unpkg.com/vue@3.0.0/dist/vue.global.js"></script>
+  <script src="./carousel.js"></script>
+</body>
+
+</html>
