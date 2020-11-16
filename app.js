@@ -6,6 +6,8 @@ Vue.createApp({
       searchWord: '',
       todoCategories: [],
       selectCategory: '',
+      todos: [],
+      categories: [],
       hideDoneTodo: false,
       order: 'desc',
       categoryName: '',
@@ -16,7 +18,11 @@ Vue.createApp({
       return this.todoTitle !== ''
     },
     canCreateCategory() {
-      return this.categoryName !== ''
+      return this.categoryName !== '' && !this.existsCategory
+    },
+    existsCategory() {
+      const categoryName = this.categoryName
+      return this.categories.includes(categoryName)
     },
   },
   methods: {
@@ -26,6 +32,15 @@ Vue.createApp({
       }
 
       // Todoを追加する
+      this.todos.push({
+        id: 'todo-' + Date.now(),
+        title: this.todoTitle,
+        description: this.todoDescription,
+        categories: this.todoCategories,
+        dateTiem: Date.now(),
+        done: false,
+      })
+
       this.todoTitle = ''
       this.todoDescription = ''
       this.todoCategories = []
@@ -36,6 +51,7 @@ Vue.createApp({
       }
 
       // カテゴリを追加する
+      this.categories.push(this.categoryName)
 
       this.categoryName = ''
     },
