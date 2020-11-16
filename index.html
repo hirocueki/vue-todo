@@ -21,6 +21,15 @@
       </div>
       <div class="new-todo-category">
         カテゴリ
+        <ul>
+          <li v-for="category in categories" :key="category">
+            <label for="'category-'+category">
+              <input type="checkbox" v-model="todoCategories" :id="'category-' + category" :value="category"
+                form="form-todo" />
+              {{category}}
+            </label>
+          </li>
+        </ul>
         <form @submit.prevent="createCategory">
           <input v-model.trim="categoryName" type="text">
           <button type="submit" :disabled="!canCreateCategory">作成</button>
@@ -33,6 +42,15 @@
       </div>
     </div>
     <div class="todo-search">
+      <div class="todo-search-item">
+        <label for="todo-search-category">カテゴリでフィルタ</label>
+        <select v-model="selectCategory" id="todo-search-categry">
+          <option value="">指定なし</option>
+          <option v-for="category in categories" :key="category" :value="category">
+            {{category}}
+          </option>
+        </select>
+      </div>
       <div class="todo-search-item">
         <label for="todo-search-done">終了したものを非表示にする
           <input type="checkbox" v-model="hideDoneTodo" id="todo-search-done">
@@ -50,6 +68,25 @@
       </div>
       <ul v-if="hasTodos" class="todo-list">
         <!-- ここにTodoタスクを表示する -->
+        <li v-for="(todo, index) in resultTodos" :key="todo.id" class="todo-item">
+          <div class="todo-item-done">
+            <input type="checkbox" v-model="todo.done">
+          </div>
+          <div class="todo-item-content">
+            <div class="todo-item-date">
+              {{ new Date(todo.dateTime).toString()}}
+            </div>
+            <h3 class="todo-item-title">{{todo.title}}</h3>
+            <div v-if="todo.description" class="todo-item-description">
+              {{todo.description}}
+            </div>
+            <ul class="todo-item-categories" v-if="todo.categories.length > 0">
+              <li v-for="category in todo.categories" :key="category" class="todo-item-category">
+                {{category}}
+              </li>
+            </ul>
+          </div>
+        </li>
       </ul>
       <p v-else>ToDoタスクはまだ登録されていません</p>
     </div>

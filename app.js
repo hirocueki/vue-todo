@@ -27,6 +27,37 @@ Vue.createApp({
     hasTodos() {
       return this.todos.length > 0
     },
+    resultTodos() {
+      const selectedCategory = this.selectCategory
+      const hideDoneTodo = this.hideDoneTodo
+      const order = this.order
+      const searchWord = this.searchWord
+      return this.todos
+        .filter(function (todo) {
+          return (
+            selectedCategory === '' ||
+            todo.categories.includes(selectedCategory)
+          )
+        })
+        .filter(function (todo) {
+          if (hideDoneTodo) {
+            return !todo.done
+          }
+          return true
+        })
+        .filter(function (todo) {
+          return (
+            todo.title.includes(searchWord) ||
+            todo.description.includes(searchWord)
+          )
+        })
+        .sort(function (a, b) {
+          if (order === 'asc') {
+            return a.dateTime - b.dateTime
+          }
+          return b.dateTime - a.dateTime
+        })
+    },
   },
   watch: {
     todos: {
@@ -54,7 +85,7 @@ Vue.createApp({
         title: this.todoTitle,
         description: this.todoDescription,
         categories: this.todoCategories,
-        dateTiem: Date.now(),
+        dateTime: Date.now(),
         done: false,
       })
 
@@ -62,7 +93,7 @@ Vue.createApp({
       this.todoDescription = ''
       this.todoCategories = []
     },
-    canCreateCategory() {
+    createCategory() {
       if (!this.canCreateCategory) {
         return
       }
