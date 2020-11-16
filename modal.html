@@ -26,6 +26,23 @@
       </li>
       </ul>
       <!-- ここまで -->
+      <!-- モーダルテンプレート-->
+      <div class="modal-container" v-show="isVisible">
+        <div class="modal-overlay">
+          <div class="modal-body" v-if="currentThumbnail !== undefined">
+            <div class="modal-image-container"
+            :class="{'isLoaded': isThumbnailLoaded}"
+            >
+              <div :style="containerStyle">
+                <img :src="currentThumbnail.src"
+                class="modal-iamge"
+                @load.prevent.stop="onLoad"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
   <script src="https://unpkg.com/vue@3.0.0/dist/vue.global.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"

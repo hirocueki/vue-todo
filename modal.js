@@ -16,11 +16,47 @@ Vue.createApp({
           src: 'https://placehold.jp/b32023/ffffff/300x300.png',
         },
       ],
+      // 選択したサムネイルID
+      selectedThumbnailId: undefined,
+      // 表示状態
+      isVisible: false,
+      // モーダル内のサムネイルの高さ
+      thumbnailHeight: 0,
+      // サムネイルが読み込み完了したかどうか
+      isThumbnailLoaded: false,
     }
+  },
+  watch: {
+    // サムネイルが選択（変更）されたらサムネイルの読み込み状態を読込中にする
+    selectedThumbnailId() {
+      this.isThumbnailLoaded = false
+    },
+  },
+  computed: {
+    // 現在表示中のサムネイルオブジェクト
+    currentThumbnail() {
+      const self = this
+      return _.find(self.thumbnails, function (thumb) {
+        return thumb.id === self.selectedThumbnailId
+      })
+    },
+    // サムネイルをラップしている要素の高さ
+    containerStyle() {
+      return {
+        height: this.thumbnailHeight + 'px',
+      }
+    },
   },
   methods: {
     openModal(thumb) {
-      console.log(thumb)
+      this.isVisible = true
+      this.selectedThumbnailId = thumb.id
+    },
+    // 画像の読み込み完了時に実行する
+    onLoad(event) {
+      this.thumbnailHeight =
+        event.target.naturalHeight > 300 ? 300 : event.target.naturalHeight
+      this.isThumbnailLoaded = true
     },
   },
 }).mount('#app')
