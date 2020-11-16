@@ -13,13 +13,11 @@
     <div class="new-todo">
       <div class="new-todo-item">
         <label for="new-todo-title">タイトル</label>
-        <input type="text" v-model.trim="todoTitle" id="new-todo-title"
-        form="form-todo" />
+        <input type="text" v-model.trim="todoTitle" id="new-todo-title" form="form-todo" />
       </div>
       <div class="new-todo-item">
         <label for="new-todo-description">説明</label>
-        <textarea v-model.trim="todoDescription" id="new-todo-description"
-        form="form-todo" ></textarea>
+        <textarea v-model.trim="todoDescription" id="new-todo-description" form="form-todo"></textarea>
       </div>
       <div class="new-todo-category">
         カテゴリ
@@ -50,6 +48,10 @@
         <label for="todo-search-keyword">キーワードで検索</label>
         <input v-model.trim="searchWord" type="text" id="todo-search-keyword" />
       </div>
+      <ul v-if="hasTodos" class="todo-list">
+        <!-- ここにTodoタスクを表示する -->
+      </ul>
+      <p v-else>ToDoタスクはまだ登録されていません</p>
     </div>
   </div>
   <script src="app.js"></script>
