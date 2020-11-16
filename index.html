@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <link href="style.css" rel="stylesheet">
   <!-- <script src="https://unpkg.com/vue@next"></script> -->
   <script src="https://unpkg.com/vue@3.0.0/dist/vue.global.js"></script>
   <title>Document</title>
@@ -66,10 +67,15 @@
         <label for="todo-search-keyword">キーワードで検索</label>
         <input v-model.trim="searchWord" type="text" id="todo-search-keyword" />
       </div>
-      <ul v-if="hasTodos" class="todo-list">
+      <transition-group
+        name="todo-list"
+        tag="ul"
+        v-if="hasTodos"
+        class="todo-list"
+         >
         <todo-item v-for="(todo, index) in resultTodos" :key="todo.id" :todo="todo" v-model:done="todo.done">
         </todo-item>
-      </ul>
+      </transition-group>
       <p v-else>ToDoタスクはまだ登録されていません</p>
     </div>
   </div>

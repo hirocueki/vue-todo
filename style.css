@@ -1,0 +1,19 @@
+.todo-list-enter-from {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.todo-list-leave-to {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.todo-list-enter-to,
+.todo-list-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.todo-item {
+  transition: opacity 300ms ease, transform 300ms ease;
+}
