@@ -40,6 +40,25 @@ Vue.createApp({
         return thumb.id === self.selectedThumbnailId
       })
     },
+    // 現在表示中のサムネイルのインデックス番号
+    currentThumbnailIndex() {
+      const self = this
+      return _.findIndex(self.thumbnails, function (thumb) {
+        return thumb.id === self.selectedThumbnailId
+      })
+    },
+    nextThumbnail() {
+      const nextIndex = this.currentThumbnailIndex + 1
+      return this.thumbnails[
+        nextIndex > this.thumbnails.length - 1 ? 0 : nextIndex
+      ]
+    },
+    prevThumbnail() {
+      const prevIndex = this.currentThumbnailIndex - 1
+      return this.thumbnails[
+        prevIndex < 0 ? this.thumbnails.length - 1 : prevIndex
+      ]
+    },
     // サムネイルをラップしている要素の高さ
     containerStyle() {
       return {
@@ -56,6 +75,14 @@ Vue.createApp({
     closeModal() {
       this.isVisible = false
       this.selectedThumbnailId = undefined
+    },
+    // 前のサムネを表示
+    onClickPrev() {
+      this.selectedThumbnailId = this.prevThumbnail.id
+    },
+    // 次のサムネを表示
+    onClickNext() {
+      this.selectedThumbnailId = this.nextThumbnail.id
     },
     // 画像の読み込み完了時に実行する
     onLoad(event) {

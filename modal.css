@@ -29,5 +29,23 @@
 .modal-overlay{
   position: relative;
   left: 50%;
+  top: 100px;
+  width: 300px;
+}
+
+.modalButton {
+  position: absolute;
   top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 1px 8px rgba(0,0,0,0.2);
+}
+
+.modalButton--prev {
+  left:0;
+  transform: translateX(-50%);
+}
+
+.modalButton--next {
+  right:0;
+  transform: translateX(50%);
 }
