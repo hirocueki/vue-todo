@@ -13,11 +13,25 @@
     <div class="new-todo">
       <div class="new-todo-item">
         <label for="new-todo-title">タイトル</label>
-        <input type="text" v-model.trim="todoTitle" id="new-todo-title" />
+        <input type="text" v-model.trim="todoTitle" id="new-todo-title"
+        form="form-todo" />
       </div>
       <div class="new-todo-item">
         <label for="new-todo-description">説明</label>
-        <textarea v-model.trim="todoDescription" id="new-todo-description"></textarea>
+        <textarea v-model.trim="todoDescription" id="new-todo-description"
+        form="form-todo" ></textarea>
+      </div>
+      <div class="new-todo-category">
+        カテゴリ
+        <form @submit.prevent="createCategory">
+          <input v-model.trim="categoryName" type="text">
+          <button type="submit">作成</button>
+        </form>
+      </div>
+      <div class="new-todo-action">
+        <form id="form-todo" @submit.prevent="createTodo">
+          <button type="submit">作成</button>
+        </form>
       </div>
     </div>
     <div class="todo-search">
