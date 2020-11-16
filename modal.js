@@ -18,6 +18,8 @@ Vue.createApp({
       ],
       // 選択したサムネイルID
       selectedThumbnailId: undefined,
+      // 画像のトランジション
+      imageTransitionName: 'prev',
       // 表示状態
       isVisible: false,
       // モーダル内のサムネイルの高さ
