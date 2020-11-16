@@ -10,13 +10,30 @@
 
 <body>
   <div id="app">
-    <div class="new-toto">
-      <input type="text" v-model="message">
-      <textarea v-model="message"></textarea>
-      <p>{{message}}</p>
+    <div class="new-todo">
+      <div class="new-todo-item">
+        <label for="new-todo-title">タイトル</label>
+        <input type="text" v-model="totoTitle" id="new-todo-title" />
+      </div>
+      <div class="new-todo-item">
+        <label for="new-todo-description">説明</label>
+        <textarea v-model="todoDescription" id="new-todo-description"></textarea>
+      </div>
+    </div>
+    <div class="todo-search">
+      <div class="todo-search-done">
+        <label for="todo-search-done">終了したものを非表示にする
+          <input type="checkbox" v-model="hideDoneTodo" id="todo-search-done">
+        </label>
+
+      </div>
+      <div class="todo-search-item">
+        <label for="todo-search-keyword">キーワードで検索</label>
+        <input v-model="searchWord" type="text" id="todo-search-keyword" />
+      </div>
     </div>
   </div>
-  <script src="index.js"></script>
+  <script src="app.js"></script>
 </body>
 
 </html>
