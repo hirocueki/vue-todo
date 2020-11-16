@@ -5,7 +5,9 @@ Vue.createApp({
       todoDescription: '',
       searchWord: '',
       todoCategories: [],
+      selectCategory: '',
       hideDoneTodo: false,
+      order: 'desc',
     }
   },
 }).mount('#app')

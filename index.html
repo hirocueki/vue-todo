@@ -21,11 +21,16 @@
       </div>
     </div>
     <div class="todo-search">
-      <div class="todo-search-done">
+      <div class="todo-search-item">
         <label for="todo-search-done">終了したものを非表示にする
           <input type="checkbox" v-model="hideDoneTodo" id="todo-search-done">
         </label>
-
+      </div>
+      <div class="todo-search-item">
+        <select v-model="order">
+          <option value="desc">降順</option>
+          <option value="asc">昇順</option>
+        </select>
       </div>
       <div class="todo-search-item">
         <label for="todo-search-keyword">キーワードで検索</label>
