@@ -52,6 +52,11 @@ Vue.createApp({
       this.isVisible = true
       this.selectedThumbnailId = thumb.id
     },
+    // モーダルを閉じる
+    closeModal() {
+      this.isVisible = false
+      this.selectedThumbnailId = undefined
+    },
     // 画像の読み込み完了時に実行する
     onLoad(event) {
       this.thumbnailHeight =
